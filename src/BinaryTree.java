@@ -22,4 +22,7 @@ public class BinaryTree{
 	public int getTreeSize(){
 		return this.counter;
 	}
+	public TreeNode getRoot(){
+		return root;
+	}
 }
