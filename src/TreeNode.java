@@ -1,29 +1,29 @@
 
 public class TreeNode {
-	private TreeNode parent;
+	private String id;
 	private TreeNode rightChild;
 	private TreeNode leftChild;
 	private boolean isRoot;
-	public TreeNode(TreeNode p, TreeNode r, TreeNode l){
-		this.parent = p;
+	public TreeNode(String p, TreeNode r, TreeNode l, boolean d){
+		this.id = p;
 		this.rightChild = r;
 		this.leftChild = l;
-		this.isRoot = false;
+		this.isRoot = d;
 	}
 	
-	public TreeNode(TreeNode r, TreeNode l){
-		this.parent = null;
-		this.rightChild = r;
-		this.leftChild = l;
-		this.isRoot = true;
+	public TreeNode(String p){
+		this.id = p;
+		this.rightChild = null;
+		this.leftChild = null;
+		this.isRoot = false;
 	}
 	
 	public TreeNode getRightChild(){
 		return this.rightChild;
 	}
 	
-	public TreeNode getParent(){
-		return this.parent;
+	public String getID(){
+		return this.id;
 	}
 	
 	public TreeNode getLeftChild(){
@@ -31,19 +31,8 @@ public class TreeNode {
 	}
 	
 	public static boolean isEqual(TreeNode a, TreeNode b){
-		if(a.isRoot()&&b.isRoot()){
+		if(a.getID().equals(b.getID())){
 			return true;
-		}else{
-			if(a.isRoot()&&!b.isRoot()){
-				return false;
-			}else{
-				if(!a.isRoot()&&b.isRoot()){
-					return false;
-				}else{
-					if(a.getParent()==b.getParent()&&a.getLeftChild()==b.getLeftChild()&&a.getRightChild()==b.getRightChild()) 
-						return true;
-				}
-			}
 		}
 		return false;
 	}
