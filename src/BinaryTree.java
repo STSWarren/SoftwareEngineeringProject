@@ -22,8 +22,12 @@ public class BinaryTree{
 	        	if(orientation.equals("right")){
 	        		parent.setRightChild(child);
 		            this.counter++;
+	        	}else{
+	        		System.out.print("Enter a valid orientation (left/right)\n");
 	        	}
 	        }
+		}else{
+			System.out.print("Null nodes are not allowed\n");
 		}
 	}
 	

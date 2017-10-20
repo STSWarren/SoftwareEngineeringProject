@@ -20,6 +20,18 @@ public class BinaryTreeTest extends TestCase {
 			
 		}
 		assertEquals(1, tree.getTreeSize());
+		try{
+			tree.add(tree.getRoot(), null, null);
+		}catch(Exception e){
+			
+		}
+		assertEquals(1, tree.getTreeSize());
+		try{
+			tree.add(tree.getRoot(), new TreeNode(""+4,false), null);
+		}catch(Exception e){
+			
+		}
+		assertEquals(1, tree.getTreeSize());
 	}
 
 }

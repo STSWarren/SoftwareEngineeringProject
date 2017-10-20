@@ -24,7 +24,11 @@ public class main {
 		try{
 			TreeNode LCA = new TreeNode(""+6,false);
 			LCA = findLCA(tree.getRoot(),"6", "2");
-			System.out.print(LCA.getData());
+			if(LCA!=null){
+				System.out.print(LCA.getData());
+			}else{
+				System.out.print("One or more pieces of data were not present in the tree.");
+			}
 		}catch(Exception e){
 			
 		}
@@ -32,7 +36,7 @@ public class main {
 		
 	}
 	
-	public static TreeNode findLCA(TreeNode r, String dataOne,String dataTwo)throws Exception{
+	public static TreeNode findLCA(TreeNode r,String dataOne,String dataTwo)throws Exception{
 		if(dataOne==null||dataTwo==null){
 			throw new Exception("null data not allowed");
 		}
