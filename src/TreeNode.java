@@ -11,11 +11,19 @@ public class TreeNode {
 		this.isRoot = d;
 	}
 	
-	public TreeNode(String p){
+	public TreeNode(String p, boolean root){
 		this.id = p;
 		this.rightChild = null;
 		this.leftChild = null;
-		this.isRoot = false;
+		this.isRoot = root;
+	}
+	
+	public void setRightChild(TreeNode r){
+		this.rightChild = r;
+	}
+	
+	public void setLeftChild(TreeNode l){
+		this.leftChild = l;
 	}
 	
 	public TreeNode getRightChild(){
