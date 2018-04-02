@@ -3,35 +3,42 @@ import java.util.Random;
 
 public class main {
 	public static void main(String args[]){
+		ArrayList<TreeNode> nodes = new ArrayList<TreeNode>();
 		Tree tree = new Tree("data1");
 		try{
 			TreeNode n = new TreeNode(""+2,false,""+tree.getTreeSize());
 			tree.add(tree.getRoot(),n);
+			nodes.add(n);
 			n = new TreeNode(""+3,false,""+tree.getTreeSize());
 			tree.add(tree.getRoot(),n);
+			nodes.add(n);
 			n = new TreeNode(""+4,false,""+tree.getTreeSize());
 			int index = randInt(0,tree.getRoot().getChildren().size()-1);
 			TreeNode parent = tree.getRoot().getChild(index);
 			tree.add(parent,n);
+			nodes.add(n);
 			n = new TreeNode(""+5,false,""+tree.getTreeSize());
 			index = randInt(0,tree.getRoot().getChildren().size()-1);
 			parent = tree.getRoot().getChild(index);
 			tree.add(parent,n);
+			nodes.add(n);
 			n = new TreeNode(""+6,false,""+tree.getTreeSize());
 			index = randInt(0,parent.getChildren().size()-1);
 			parent = parent.getChild(index);
 			tree.add(parent,n);
+			nodes.add(n);
 			n = new TreeNode(""+7,false,""+tree.getTreeSize());
 			index = randInt(0,parent.getChildren().size()-1);
 			parent = parent.getChild(index);
 			tree.add(parent,n);
+			nodes.add(n);
 		}catch(Exception e){
 		
 		}
 		
 		try{
 			TreeNode LCA=null;
-			LCA = findLCA(tree.getRoot(),"6", "2");
+			LCA = findLCA(nodes.get(1),nodes.get(6));
 			if(LCA!=null){
 				System.out.print(LCA.getData());
 			}else{
@@ -100,3 +107,4 @@ public class main {
 	    return randomNum;
 	}
 }
+
