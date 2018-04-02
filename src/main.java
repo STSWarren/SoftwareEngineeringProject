@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class main {
@@ -43,33 +44,59 @@ public class main {
 		
 	}
 	
-	public static TreeNode findLCA(TreeNode r,String dataOne,String dataTwo)throws Exception{
-		if(dataOne==null||dataTwo==null){
-			throw new Exception("null data not allowed");
+	public static TreeNode findLCA(TreeNode A, TreeNode B){
+		if(A.isRoot()){
+			return A;
 		}
-		if(r == null){
-			return null;
+		if(B.isRoot()){
+			return B;
 		}
-		if(r.getData().equals(dataOne)||r.getData().equals(dataTwo)){
-			return r;
+		if(B.searchParents(B, A)){
+			return A;
 		}
-		
-		TreeNode left = findLCA(r.getLeftChild(),dataOne,dataTwo);
-		TreeNode right = findLCA(r.getRightChild(),dataOne,dataTwo);
-		if(left!=null&&right!=null){
-			return r;
+		if(A.searchParents(A, B)){
+			return B;
 		}
-		if(left!=null){
-			return left;
-		}else{
-			return right;
-		}
+		NodeAndDepth LCAWithDepth = findLCAWithDepth(A,B,1);
+		TreeNode LCA = LCAWithDepth.node;
+		return LCA;
 	}
 	
+	public static NodeAndDepth findLCAWithDepth(TreeNode A, TreeNode B, int depth){
+		NodeAndDepth returnable;
+		if(A.isRoot()){
+			returnable = new NodeAndDepth(A,depth);
+			return returnable;
+		}
+		if(B.isRoot()){
+			returnable = new NodeAndDepth(B,depth);
+			return returnable;
+		}
+		if(B.searchParents(B, A)){
+			returnable = new NodeAndDepth(A,depth);
+			return returnable;
+		}
+		if(A.searchParents(A, B)){
+			returnable = new NodeAndDepth(B,depth);
+			return returnable;
+		}
+		ArrayList<TreeNode> AParents = A.getParents();
+		NodeAndDepth[] results = new NodeAndDepth[AParents.size()];
+		int newDepth = depth+1;
+		for(int i = 0; i<AParents.size();i++){
+			results[i] = findLCAWithDepth(AParents.get(i),B,newDepth);
+		}
+		returnable = results[0];
+		for(int i = 0; i<results.length;i++){
+			if(results[i].depth<returnable.depth){
+				returnable = results[i];
+			}
+		}
+		return returnable;
+	}
 	public static int randInt(int min, int max) {
 	    Random rand = new Random();
 	    int randomNum = rand.nextInt((max - min) + 1) + min;
 	    return randomNum;
 	}
 }
-
