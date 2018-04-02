@@ -1,28 +1,35 @@
+import java.util.Random;
 
 public class main {
 	public static void main(String args[]){
-		BinaryTree tree = new BinaryTree(1);
+		Tree tree = new Tree("data1");
 		try{
-			TreeNode n = new TreeNode(""+2,false);
-			tree.add(tree.getRoot(),n,"left");
-			n = new TreeNode(""+3,false);
-			tree.add(tree.getRoot(),n,"right");
-		
-			n = new TreeNode(""+4,false);
-			tree.add(tree.getRoot().getLeftChild(),n,"left");
-			n = new TreeNode(""+5,false);
-			tree.add(tree.getRoot().getLeftChild(),n,"right");
-		
-			n = new TreeNode(""+6,false);
-			tree.add(tree.getRoot().getRightChild(),n,"left");
-			n = new TreeNode(""+7,false);
-			tree.add(tree.getRoot().getRightChild(),n,"right");
+			TreeNode n = new TreeNode(""+2,false,""+tree.getTreeSize());
+			tree.add(tree.getRoot(),n);
+			n = new TreeNode(""+3,false,""+tree.getTreeSize());
+			tree.add(tree.getRoot(),n);
+			n = new TreeNode(""+4,false,""+tree.getTreeSize());
+			int index = randInt(0,tree.getRoot().getChildren().size()-1);
+			TreeNode parent = tree.getRoot().getChild(index);
+			tree.add(parent,n);
+			n = new TreeNode(""+5,false,""+tree.getTreeSize());
+			index = randInt(0,tree.getRoot().getChildren().size()-1);
+			parent = tree.getRoot().getChild(index);
+			tree.add(parent,n);
+			n = new TreeNode(""+6,false,""+tree.getTreeSize());
+			index = randInt(0,parent.getChildren().size()-1);
+			parent = parent.getChild(index);
+			tree.add(parent,n);
+			n = new TreeNode(""+7,false,""+tree.getTreeSize());
+			index = randInt(0,parent.getChildren().size()-1);
+			parent = parent.getChild(index);
+			tree.add(parent,n);
 		}catch(Exception e){
 		
 		}
 		
 		try{
-			TreeNode LCA = new TreeNode(""+6,false);
+			TreeNode LCA=null;
 			LCA = findLCA(tree.getRoot(),"6", "2");
 			if(LCA!=null){
 				System.out.print(LCA.getData());
@@ -58,4 +65,11 @@ public class main {
 			return right;
 		}
 	}
+	
+	public static int randInt(int min, int max) {
+	    Random rand = new Random();
+	    int randomNum = rand.nextInt((max - min) + 1) + min;
+	    return randomNum;
+	}
 }
+
